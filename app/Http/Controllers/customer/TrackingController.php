@@ -141,6 +141,20 @@ class TrackingController extends Controller
         }
 
         if ($request->id != null) {
+            $data = explode("/", $request->id);
+
+            if (empty($data[1])) {
+                return redirect()->route("tracking.index")->with("info", "Masukkan Nomor dengan Benar");
+            }
+
+            // dd(
+            //     $request->all(),
+            //     $request->id,
+            //     explode("/", $request->id),
+            //     $data,
+            //     $data[0],
+            // );
+
             $orders = Orders::select(
                 'orders.id as id_orders',
                 'orders.*',
@@ -150,12 +164,14 @@ class TrackingController extends Controller
             )
             ->join('users', 'users.id', '=', 'orders.users_id')
             ->join('detail_orders', 'detail_orders.orders_id', '=', 'orders.id')
-            ->where('orders.id', '=', $request->id)
+            ->where('orders.id', '=', $data[1])
+            ->where('orders.date', '=', $data[0])
             ->get();
 
             if (empty($orders[0])) {
-                Alert::info('Proses Gagal', 'Data transaksi tidak ditemukan');
-                return redirect('/tracking');
+                // Alert::info('Proses Gagal', 'Data transaksi tidak ditemukan');
+                // return redirect('/tracking');
+                return redirect()->route("tracking.index")->with("info", "Data transaksi tidak ditemukan");
             } else {
                 $jumlah = Productions::select(
                     'productions.*',
@@ -268,8 +284,9 @@ class TrackingController extends Controller
                 ]);
             }
         } else {
-            Alert::warning('Proses Gagal', 'Inputan tidak boleh kosong');
-            return redirect('/tracking');
+            // Alert::warning('Proses Gagal', 'Inputan tidak boleh kosong');
+            // return redirect('/tracking');
+            return redirect()->route("tracking.index")->with("info", "Masukkan Nomor dengan Benar");
         }
 
         // dd(
@@ -383,6 +400,20 @@ class TrackingController extends Controller
 
 
         if ($request->id != null) {
+            $data = explode("/", $request->id);
+
+            if (empty($data[1])) {
+                return redirect()->route("customs.tracking")->with("info", "Masukkan Nomor dengan Benar");
+            }
+
+            // dd(
+            //     $request->all(),
+            //     $request->id,
+            //     explode("/", $request->id),
+            //     $data,
+            //     $data[0],
+            // );
+
             $customs = Customs::select(
                 'customs.id as id_customs',
                 'customs.*',
@@ -391,12 +422,14 @@ class TrackingController extends Controller
                 'customs.umkms_id as id_umkm',
             )
             ->join('users', 'users.id', '=', 'customs.users_id')
-            ->where('customs.id', '=', $request->id)
+            ->where('customs.id', '=', $data[1])
+            ->where('customs.date', '=', $data[0])
             ->get();
 
             if (empty($customs[0])) {
-                Alert::info('Proses Gagal', 'Data transaksi tidak ditemukan');
-                return redirect('/trackingcustom');
+                // Alert::info('Proses Gagal', 'Data transaksi tidak ditemukan');
+                // return redirect('/trackingcustom');
+                return redirect()->route("customs.tracking")->with("info", "Data transaksi tidak ditemukan");
             } else {
                 $jumlah = Production_customs::join('customs', 'customs.id', '=', 'production_customs.customs_id')
                 ->where('production_customs.umkms_id', '=', $customs[0]->id_umkm)
@@ -492,8 +525,9 @@ class TrackingController extends Controller
                 ]);
             }
         } else {
-            Alert::warning('Proses Gagal', 'Inputan tidak boleh kosong');
-            return redirect('/trackingcustom');
+            // Alert::warning('Proses Gagal', 'Inputan tidak boleh kosong');
+            // return redirect('/trackingcustom');
+            return redirect()->route("customs.tracking")->with("info", "Masukkan Nomor dengan Benar");
         }
 
         // dd(

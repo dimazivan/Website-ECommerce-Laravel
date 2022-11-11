@@ -109,6 +109,13 @@
 									@endif
 									<a class="nav-link" href="/coupon">Promo</a>
 								</li>
+								@if($pageactive == "cekongkir")
+								<li class="nav-item active">
+									@else
+								<li class="nav-item">
+									@endif
+									<a class="nav-link" href="/ongkir">Cek Ongkir</a>
+								</li>
 							</ul>
 						</li>
 						@if($pageactive == "contact")

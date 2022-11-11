@@ -28,8 +28,8 @@ class Raja_ongkirController extends Controller
      */
     public function index()
     {
-        $title = "Form Custom Order";
-        $pageactive = 'customs';
+        $title = "Cek Ongkir (Raja Ongkir)";
+        $pageactive = 'cekongkir';
         $info = Info::first();
         $cost = [];
 

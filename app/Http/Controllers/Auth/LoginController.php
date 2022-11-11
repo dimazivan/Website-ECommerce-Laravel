@@ -69,9 +69,13 @@ class LoginController extends Controller
 
     public function logout()
     {
-        Auth::logout();
-        Alert::success('Congrats', 'You\'ve Successfully Logout');
-        // toast('You\'ve Successfully Logout!', 'success');
-        return redirect('/');
+        if (auth()->user()) {
+            Auth::logout();
+            Alert::success('Congrats', 'You\'ve Successfully Logout');
+            // toast('You\'ve Successfully Logout!', 'success');
+            return redirect('/');
+        } else {
+            return redirect()->route("index.login")->with("info", "Sesi Login anda habis atau Username dan Password Anda Salah");
+        }
     }
 }
