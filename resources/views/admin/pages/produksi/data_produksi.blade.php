@@ -88,11 +88,11 @@
                                                         $item->status != "Selesai")
                                                         <div class="progress progress_sm">
                                                             <div class="progress-bar bg-green" role="progressbar"
-                                                                data-transitiongoal="{{ $persen }}">
+                                                                data-transitiongoal="{{ round($persen,2) }}">
                                                             </div>
                                                         </div>
                                                         <small>
-                                                            {{ $persen }}%
+                                                            {{ round($persen,2) }}%
                                                         </small>
                                                         @elseif(($sekarang > $item->tanggal_selesai &&
                                                         $item->tanggal_selesai != null) || $item->status == "Selesai")

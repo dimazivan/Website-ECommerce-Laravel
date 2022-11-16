@@ -508,8 +508,8 @@
                                                         id="trackcustom{{$items->id_custom}}" class="form"
                                                         novalidate="novalidate" enctype="multipart/form-data">
                                                         @csrf
-                                                        <input type="text" name="id" value="{{ $items->id_custom }}"
-                                                            hidden>
+                                                        <input type="text" name="id"
+                                                            value="{{ $items->date }}/{{ $items->id_custom }}" hidden>
                                                         <a href="javascript:{}"
                                                             onclick="document.getElementById('trackcustom{{ $items->id_custom }}').submit(); return false;">
                                                             Klik Disini...
@@ -853,7 +853,8 @@
                                                                 novalidate="novalidate" enctype="multipart/form-data">
                                                                 @csrf
                                                                 <input type="text" name="id"
-                                                                    value="{{ $item->id_orders }}" hidden>
+                                                                    value="{{ $item->date }}/{{ $item->id_orders }}"
+                                                                    hidden>
                                                                 <a href="javascript:{}"
                                                                     onclick="document.getElementById('track{{ $item->id_orders }}').submit(); return false;">
                                                                     Klik Disini...

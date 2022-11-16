@@ -115,6 +115,11 @@
                                                     <tr>
                                                         <td style="text-transform:uppercase;">
                                                             {{ $isi->status_produksi }}
+                                                            <small>
+                                                                <br>{{ $isi->nama_produk ? $isi->nama_produk : "" }}
+                                                                <br>{{ $isi->ukuran_produk ? $isi->ukuran_produk : "" }}
+                                                                <br>{{ $isi->warna_produk ? $isi->warna_produk : "" }}
+                                                            </small>
                                                         </td>
                                                         <td>
                                                             {{ $isi->tanggal_mulai }}
@@ -154,19 +159,22 @@
                                                                 aria-valuemin="0" aria-valuemax="100">0
                                         </div>
                                         @elseif($persen >= 21 || 40 >= $persen) <div class="progress-bar color-2"
-                                            role="progressbar" style="width: {{ $persen }}%"
-                                            aria-valuenow="{{ $persen }}" aria-valuemin="0" aria-valuemax="100">{{
-                                            $persen }}
+                                            role="progressbar" style="width: {{ round($persen,2) }}%"
+                                            aria-valuenow="{{ round($persen,2) }}" aria-valuemin="0"
+                                            aria-valuemax="100">
+                                            {{ round($persen,2) }}
                                         </div>
                                         @elseif($persen >= 41 || 60 >=$persen) <div class="progress-bar color-3 "
-                                            role="progressbar" style="width: {{ $persen }}%"
-                                            aria-valuenow="{{ $persen }}" aria-valuemin="0" aria-valuemax="100">{{
-                                            $persen }}
+                                            role="progressbar" style="width: {{ round($persen,2) }}%"
+                                            aria-valuenow="{{ round($persen,2) }}" aria-valuemin="0"
+                                            aria-valuemax="100">
+                                            {{ round($persen,2) }}
                                         </div>
                                         @else
                                         <div class="progress-bar color-3" role="progressbar"
-                                            style="width: {{ $persen }}%" aria-valuenow="{{ $persen }}"
-                                            aria-valuemin="0" aria-valuemax="100">{{ $persen }}
+                                            style="width: {{ round($persen,2) }}%"
+                                            aria-valuenow="{{ round($persen,2) }}" aria-valuemin="0"
+                                            aria-valuemax="100">{{ round($persen,2) }}
                                         </div>
                                         @endif
                                         @endif
@@ -177,7 +185,7 @@
                                                 </strong>
                                                 @else
                                                 <strong>
-                                                    {{ $persen }}%
+                                                    {{ round($persen,2) }}%
                                                 </strong>
                                                 @endif
                                         </td>
@@ -192,6 +200,11 @@
                                         <tr>
                                             <td style="text-transform:uppercase;">
                                                 {{ $isi->status_produksi }}
+                                                <small>
+                                                    <br>{{ $isi->nama_produk ? $isi->nama_produk : "" }}
+                                                    <br>{{ $isi->ukuran_produk ? $isi->ukuran_produk : "" }}
+                                                    <br>{{ $isi->warna_produk ? $isi->warna_produk : "" }}
+                                                </small>
                                             </td>
                                             <td>
                                                 {{ $isi->tanggal_mulai }}

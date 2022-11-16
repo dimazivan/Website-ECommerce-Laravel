@@ -54,6 +54,12 @@ class TrackingController extends Controller
         $title = 'Tracking Your Order';
         $pageactive = 'tracking';
 
+        $data = explode("/", $request->id);
+
+        if (empty($data[1])) {
+            return redirect()->route("tracking.index")->with("info", "Masukkan Nomor dengan Benar");
+        }
+
         // Query Update Produksi
         $upd = Productions::select(
             'orders.first_name as nama_depan',
@@ -115,7 +121,7 @@ class TrackingController extends Controller
         )
         ->join('detail_orders', 'detail_orders.id', '=', 'productions.detail_orders_id')
         ->join('orders', 'orders.id', '=', 'detail_orders.orders_id')
-        ->where('detail_orders.orders_id', '=', $request->id)
+        ->where('detail_orders.orders_id', '=', $data[1])
         ->where('productions.status', '=', "Diproses")
         ->orWhere('productions.status', '=', "Menunggu")
         ->get();
@@ -132,7 +138,7 @@ class TrackingController extends Controller
         // }
 
         if (empty($produksi[0])) {
-            DB::table('orders')->where('id', $request->id)
+            DB::table('orders')->where('id', $data[1])
             ->where('status', '=', 'Proses Produksi')
             ->update([
                 'status' => 'Pesanan Siap Dikirim',
@@ -141,7 +147,7 @@ class TrackingController extends Controller
         }
 
         if ($request->id != null) {
-            $data = explode("/", $request->id);
+            // $data = explode("/", $request->id);
 
             if (empty($data[1])) {
                 return redirect()->route("tracking.index")->with("info", "Masukkan Nomor dengan Benar");
@@ -161,9 +167,13 @@ class TrackingController extends Controller
                 'users.*',
                 'orders.updated_at',
                 'detail_orders.umkms_id as id_umkm',
+                // 'detail_orders.products_name as nama_produk',
+                // 'detail_orders.size as ukuran_produk',
+                // 'detail_orders.color as warna_produk',
             )
             ->join('users', 'users.id', '=', 'orders.users_id')
             ->join('detail_orders', 'detail_orders.orders_id', '=', 'orders.id')
+            // ->leftjoin('detail_products', 'detail_orders.detail_products_id', '=', 'detail_products.id')
             ->where('orders.id', '=', $data[1])
             ->where('orders.date', '=', $data[0])
             ->get();
@@ -180,20 +190,22 @@ class TrackingController extends Controller
                 ->join('detail_orders', 'detail_orders.id', '=', 'productions.detail_orders_id')
                 ->join('orders', 'orders.id', '=', 'detail_orders.orders_id')
                 ->where('productions.umkms_id', '=', $orders[0]->id_umkm)
-                ->where('orders.id', '=', $request->id)
+                ->where('orders.id', '=', $data[1])
                 ->where('productions.status', '=', 'Diproses')
                 ->orWhere('productions.status', '=', 'Selesai')
                 ->count();
 
-
                 $produksi = Productions::select(
                     'productions.*',
+                    'detail_orders.products_name as nama_produk',
+                    'detail_orders.size as ukuran_produk',
+                    'detail_orders.color as warna_produk',
                     // DB::raw('sum(productions.estimasi) as total_estimasi'),
                 )
                 ->join('detail_orders', 'detail_orders.id', '=', 'productions.detail_orders_id')
                 ->join('orders', 'orders.id', '=', 'detail_orders.orders_id')
                 ->where('productions.umkms_id', '=', $orders[0]->id_umkm)
-                ->where('orders.id', '=', $request->id)
+                ->where('orders.id', '=', $data[1])
                 ->where('productions.status', '=', 'Diproses')
                 ->orWhere('productions.status', '=', 'Selesai')
                 ->get();
@@ -201,7 +213,7 @@ class TrackingController extends Controller
                 $datatotal_estimasi = Productions::join('detail_orders', 'detail_orders.id', '=', 'productions.detail_orders_id')
                 ->join('orders', 'orders.id', '=', 'detail_orders.orders_id')
                 ->where('productions.umkms_id', '=', $orders[0]->id_umkm)
-                ->where('orders.id', '=', $request->id)
+                ->where('orders.id', '=', $data[1])
                 ->where('productions.status', '=', 'Diproses')
                 ->orWhere('productions.status', '=', 'Selesai')
                 ->sum('productions.estimasi');
@@ -304,6 +316,12 @@ class TrackingController extends Controller
         $title = 'Tracking Your Order';
         $pageactive = 'tracking';
 
+        $data = explode("/", $request->id);
+
+        if (empty($data[1])) {
+            return redirect()->route("customs.tracking")->with("info", "Masukkan Nomor dengan Benar");
+        }
+
         // Query Update Produksi
         $upd = Production_customs::select(
             'customs.first_name as nama_depan',
@@ -346,7 +364,7 @@ class TrackingController extends Controller
             'production_customs.id as id_produksi',
         )
         ->join('customs', 'customs.id', '=', 'production_customs.customs_id')
-        ->where('customs.id', '=', $request->id)
+        ->where('customs.id', '=', $data[1])
         ->where('production_customs.status', '=', "Diproses")
         ->orWhere('production_customs.status', '=', "Menunggu")
         ->get();
@@ -364,7 +382,7 @@ class TrackingController extends Controller
             // }
 
             if (empty($produksi[0])) {
-                DB::table('customs')->where('id', $request->id)
+                DB::table('customs')->where('id', $data[1])
                 ->where('status', '=', "Proses Produksi")
                 ->update([
                     'status' => 'Pesanan Siap Dikirim',
@@ -400,7 +418,7 @@ class TrackingController extends Controller
 
 
         if ($request->id != null) {
-            $data = explode("/", $request->id);
+            // $data = explode("/", $request->id);
 
             if (empty($data[1])) {
                 return redirect()->route("customs.tracking")->with("info", "Masukkan Nomor dengan Benar");
@@ -433,7 +451,7 @@ class TrackingController extends Controller
             } else {
                 $jumlah = Production_customs::join('customs', 'customs.id', '=', 'production_customs.customs_id')
                 ->where('production_customs.umkms_id', '=', $customs[0]->id_umkm)
-                ->where('customs.id', '=', $request->id)
+                ->where('customs.id', '=', $data[1])
                 ->where('production_customs.status', '=', 'Diproses')
                 ->orWhere('production_customs.status', '=', 'Selesai')
                 ->count();
@@ -443,14 +461,14 @@ class TrackingController extends Controller
                 )
                 ->join('customs', 'customs.id', '=', 'production_customs.customs_id')
                 ->where('production_customs.umkms_id', '=', $customs[0]->id_umkm)
-                ->where('customs.id', '=', $request->id)
+                ->where('customs.id', '=', $data[1])
                 ->where('production_customs.status', '=', 'Diproses')
                 ->orWhere('production_customs.status', '=', 'Selesai')
                 ->get();
 
                 $datatotal_estimasi = Production_customs::join('customs', 'customs.id', '=', 'production_customs.customs_id')
                 ->where('production_customs.umkms_id', '=', $customs[0]->id_umkm)
-                ->where('customs.id', '=', $request->id)
+                ->where('customs.id', '=', $data[1])
                 ->where('production_customs.status', '=', 'Diproses')
                 ->orWhere('production_customs.status', '=', 'Selesai')
                 ->sum('production_customs.estimasi');
@@ -514,14 +532,14 @@ class TrackingController extends Controller
                 // $produksi = $produksi->unique();
 
                 return view('customer.pages.tracking.tracking_produksi', [
-                'orders' => $customs,
-                'datatotal_estimasi'=> $datatotal_estimasi,
-                'total_persen' => $total_persen,
-                'jumlah' => $jumlah,
-                'produksi' => $produksi,
-                'title' => $title,
-                'info' => $info,
-                'pageactive' => $pageactive,
+                    'orders' => $customs,
+                    'datatotal_estimasi'=> $datatotal_estimasi,
+                    'total_persen' => $total_persen,
+                    'jumlah' => $jumlah,
+                    'produksi' => $produksi,
+                    'title' => $title,
+                    'info' => $info,
+                    'pageactive' => $pageactive,
                 ]);
             }
         } else {

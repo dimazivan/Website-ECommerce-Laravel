@@ -169,17 +169,6 @@ class OrderController extends Controller
         //     $request->all(),
         // );
 
-        try {
-            $decrypted = decrypt($request->id);
-            // Log
-        } catch (DecryptException $e) {
-            return view('admin.pages.error.page_404', [
-                'e' => ["Invalid Data"],
-            ]);
-        }
-
-        $newid = Crypt::decrypt($request->id);
-
         if (auth()->user()->role == "produksi") {
             Alert::info('Proses Gagal', 'Anda tidak memiliki akses');
             return view('admin.pages.error.page_404');
@@ -196,6 +185,11 @@ class OrderController extends Controller
         ->where('detail_orders.umkms_id', '=', $idumkm[0]->umkms_id)
         ->where('orders.status', '=', 'Pesanan Siap Dikirim')
         ->get();
+
+        // dd(
+        //     $request->all(),
+        //     $page,
+        // );
 
         if (empty($page[0])) {
             Alert::info('Proses Gagal', 'Halaman tidak ditemukan');
@@ -217,10 +211,10 @@ class OrderController extends Controller
                 ]);
 
                 Alert::success('Proses Berhasil', 'Status pesanan berhasil diupdate');
-                return redirect()->route('transaksi_penjualan.show', $newid);
+                return redirect()->route('transaksi_penjualan.show', Crypt::encrypt($request->id_orders));
             } else {
                 Alert::warning('Proses Gagal', 'Inputan tidak boleh kosong');
-                return redirect()->route('pengiriman.penjualan', $newid);
+                return redirect()->route('pengiriman.penjualan', Crypt::encrypt($request->id_orders));
             }
         }
     }
@@ -292,12 +286,12 @@ class OrderController extends Controller
             $pageactive = "adminpenjualan";
             $title = "Halaman Data Transaksi Penjualan";
             return view('admin.pages.transaksi_penjualan.acc_penjualan', [
-            'page' => $page,
-            'cart' => $cart,
-            'tanggal' => $tanggal,
-            'batas' => $batas,
-            'pageactive' => $pageactive,
-            'title' => $title,
+                'page' => $page,
+                'cart' => $cart,
+                'tanggal' => $tanggal,
+                'batas' => $batas,
+                'pageactive' => $pageactive,
+                'title' => $title,
             ]);
         }
     }

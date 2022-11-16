@@ -186,7 +186,8 @@
                                                                 enctype="multipart/form-data">
                                                                 @csrf
                                                                 <input type="text" name="id"
-                                                                    value="{{ $page[0]->orders_id }}" hidden>
+                                                                    value="{{ $page[0]->date }}/{{ $page[0]->orders_id }}"
+                                                                    hidden>
                                                                 <a href="javascript:{}"
                                                                     onclick="document.getElementById('track{{ $page[0]->orders_id }}').submit(); return false;">
                                                                     Klik Disini...
