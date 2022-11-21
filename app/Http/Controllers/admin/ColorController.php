@@ -249,9 +249,9 @@ class ColorController extends Controller
             $pageactive = "adminwarnaedit";
             $title = "Halaman Edit Data Warna Produk";
             return view('admin.pages.color.edit_color', [
-            'page' => $page,
-            'pageactive' => $pageactive,
-            'title' => $title,
+                'page' => $page,
+                'pageactive' => $pageactive,
+                'title' => $title,
             ]);
         }
     }

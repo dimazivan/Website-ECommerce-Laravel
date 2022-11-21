@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Produksi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Productions;
+use App\Models\Deadlines;
 use App\Models\Estimations;
 use App\Models\Customers;
 use App\Models\Orders;
@@ -662,17 +663,19 @@ class ProductionController extends Controller
             return view('admin.pages.error.page_404');
         } else {
             $tanggal = Carbon::parse($page[0]->date);
-            $batas = $tanggal->addHours(48);
+            $deadline = Deadlines::where('umkms_id', '=', $idumkm[0]->umkms_id)
+            ->get();
+            $batas = $tanggal->addHours($deadline[0]->deadline);
 
             $pageactive = "adminpenjualan";
             $title = "Halaman Data Transaksi Penjualan";
             return view('admin.pages.produksi.detail_produksi', [
-            'tanggal' => $tanggal,
-            'batas' => $batas,
-            'page' => $page,
-            'cart' => $cart,
-            'pageactive' => $pageactive,
-            'title' => $title,
+                'tanggal' => $tanggal,
+                'batas' => $batas,
+                'page' => $page,
+                'cart' => $cart,
+                'pageactive' => $pageactive,
+                'title' => $title,
             ]);
         }
     }

@@ -317,9 +317,9 @@ class UserController extends Controller
             $pageactive = "adminuseredit";
             $title = "Halaman Edit Data User";
             return view('admin.pages.user.edit_user', [
-            'page' => $page,
-            'pageactive' => $pageactive,
-            'title' => $title,
+                'page' => $page,
+                'pageactive' => $pageactive,
+                'title' => $title,
             ]);
         }
     }

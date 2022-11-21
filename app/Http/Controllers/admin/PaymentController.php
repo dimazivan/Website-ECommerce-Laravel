@@ -259,9 +259,9 @@ class PaymentController extends Controller
             $pageactive = 'adminpembayarancreate';
             $title = "Form Edit Data Portal Pembayaran";
             return view('admin.pages.pembayaran.edit_pembayaran', [
-            'page' => $page,
-            'pageactive' => $pageactive,
-            'title' => $title,
+                'page' => $page,
+                'pageactive' => $pageactive,
+                'title' => $title,
             ]);
         }
     }

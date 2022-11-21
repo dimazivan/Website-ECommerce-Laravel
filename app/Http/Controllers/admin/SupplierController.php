@@ -230,9 +230,9 @@ class SupplierController extends Controller
             $pageactive = "adminsupplierview";
             $title = "Halaman Data Supplier";
             return view('admin.pages.supplier.view_supplier', [
-            'supplier' => $supplier,
-            'pageactive' => $pageactive,
-            'title' => $title,
+                'supplier' => $supplier,
+                'pageactive' => $pageactive,
+                'title' => $title,
             ]);
         }
     }
