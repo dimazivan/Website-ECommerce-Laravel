@@ -70,7 +70,7 @@ class InfosSeeder extends Seeder
 
         DB::table('infos')->insert([
             'umkms_id' => '3',
-            'no_wa' => '0812971297',
+            'no_wa' => '081999999999',
             'title' => 'Elite Web Store',
             'alamat' => 'Jl. Kelapa Sari No. 50 B, Kota Madiun',
             'link_tokped' => 'https://www.tokopedia.com/Elite',

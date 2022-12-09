@@ -14,6 +14,9 @@ use App\Models\Promo;
 use App\Models\Umkms;
 use App\Models\Detail_products;
 use Illuminate\Support\Facades\DB;
+use Kavist\RajaOngkir\Facades\RajaOngkir;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
 use Redirect;
 use Carbon\Carbon;
@@ -388,6 +391,42 @@ class CartController extends Controller
         ->distinct()
         ->get();
 
+
+        $validator = Validator::make(request()->all(), [
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'phone' => 'required|numeric|digits_between:10,13',
+            'postal_code' => 'required|numeric|digits_between:5,7',
+            'address' => 'required|max:255',
+            'districts' => 'required|max:255',
+            'ward' => 'required|max:255',
+            'city' => 'required|max:255',
+            'province' => 'required|max:255',
+            'desc' => 'required|max:255',
+            'cbshipping' => 'required',
+            'detail' => 'max:255',
+        ])->setAttributeNames(
+            [
+                'first_name' => '"Nama Depan"',
+                'last_name' => '"Nama Belakang"',
+                'phone' => '"Nomor Telepon"',
+                'postal_code' => '"Kode Pos"',
+                'address' => '"Alamat"',
+                'districts' => '"Kecamatan"',
+                'ward' => '"Kelurahan"',
+                'city' => '"Kota"',
+                'province' => '"Provinsi"',
+                'desc' => '"Detail Alamat"',
+                'cbshipping' => '"Jasa Pengiriman"',
+                'detail' => '"Details Order"',
+            ],
+        );
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+
+
         // dd(
         //     $request->all(),
         // $waktu,
@@ -466,8 +505,6 @@ class CartController extends Controller
                         'created_at' => $waktu,
                     ]);
                 }
-
-
 
                 $orders_id = 0;
                 $orders_id = Orders::where('phone', '=', $request->phone)

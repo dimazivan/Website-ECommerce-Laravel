@@ -233,27 +233,31 @@
                         Harap masukkan informasi data pesanan Anda dengan benar, agar pesanan Anda dapat segera
                         diproses.
                     </p>
-                    @if(($errors->any()) != null)
-                    @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger alert-dismissible " role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                aria-hidden="true">x</span>
-                        </button>
-                        {{ $error }}
-                    </div>
-                    @endforeach
-                    @endif
-                    @if(\Session::has('info'))
-                    <div class="alert alert-info alert-dismissible" role="alert" data-timeout="2000">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                aria-hidden="true">x</span>
-                        </button>
-                        <strong>{{ \Session::get('info') }}</strong>
-                    </div>
-                    @endif
                     <form class="row contact_form" action="{{ route('custom.store') }}" method="post" validate
                         enctype="multipart/form-data">
                         @csrf
+                        @if(($errors->any()) != null)
+                        @foreach ($errors->all() as $error)
+                        <div class="col-md-12 form-group p_star">
+                            <div class="alert alert-danger alert-dismissible " role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">x</span>
+                                </button>
+                                {{ $error }}
+                            </div>
+                        </div>
+                        @endforeach
+                        @endif
+                        @if(\Session::has('info'))
+                        <div class="col-md-12 form-group p_star">
+                            <div class="alert alert-info alert-dismissible" role="alert" data-timeout="2000">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">x</span>
+                                </button>
+                                <strong>{{ \Session::get('info') }}</strong>
+                            </div>
+                        </div>
+                        @endif
                         <input type="text" name="id" value="{{ $user[0]->id }}" hidden>
                         <input type="text" name="umkm_name" value="{{ $umkm_name }}" hidden>
                         <div class="col-md-6 form-group p_star">

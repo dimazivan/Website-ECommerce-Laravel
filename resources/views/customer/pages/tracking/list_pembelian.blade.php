@@ -314,9 +314,9 @@
                                                 {{ $items->province }}"</a></li>
                                     </ul>
                                     <a class="primary-btn" data-toggle="modal"
-                                        data-target="#detailmodalcustom{{ $items->id_custom }}"
-                                        style="color:white;">Lihat
-                                        Detail</a>
+                                        data-target="#detailmodalcustom{{ $items->id_custom }}" style="color:white;">
+                                        Lihat Detail
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -383,7 +383,6 @@
                                                                 Pesanan Anda Melewati Batas Deadline
                                                                 @else
                                                                 {{ $items->status }}
-
                                                                 @endif
                                                         </a>
                                                     </li>
@@ -424,7 +423,10 @@
                                                             {{ $items->province }}"</a>
                                                     </li>
                                                     <li><a href="#"><span>Feedback</span>&nbsp;:<br>
-                                                            "{{ $items->feedback_customs }}"</a>
+                                                            "{{
+                                                            $items->feedback_customs =
+                                                            Str::limit($items->feedback_customs,15)
+                                                            }}"</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -817,7 +819,10 @@
                                                         </a>
                                                     </li>
                                                     <li><a href="#"><span>Feedback</span>&nbsp;:<br>
-                                                            "{{ $item->feedback_orders }}"
+                                                            "{{
+                                                            $item->feedback_orders =
+                                                            Str::limit($item->feedback_orders,15)
+                                                            }}"
                                                         </a>
                                                     </li>
                                                 </ul>

@@ -122,10 +122,20 @@
                                                             </small>
                                                         </td>
                                                         <td>
-                                                            {{ $isi->tanggal_mulai }}
+                                                            {{
+                                                            Carbon\Carbon::parse($isi->tanggal_mulai)
+                                                            ->locale('id')
+                                                            ->settings(['formatFunction' => 'translatedFormat'])
+                                                            ->format('l, j F Y, h:i a');
+                                                            }}
                                                         </td>
                                                         <td>
-                                                            {{ $isi->tanggal_selesai }}
+                                                            {{
+                                                            Carbon\Carbon::parse($isi->tanggal_selesai)
+                                                            ->locale('id')
+                                                            ->settings(['formatFunction' => 'translatedFormat'])
+                                                            ->format('l, j F Y, h:i a');
+                                                            }}
                                                         </td>
                                                         <td>
                                                             {{
@@ -207,10 +217,20 @@
                                                 </small>
                                             </td>
                                             <td>
-                                                {{ $isi->tanggal_mulai }}
+                                                {{
+                                                Carbon\Carbon::parse($isi->tanggal_mulai)
+                                                ->locale('id')
+                                                ->settings(['formatFunction' => 'translatedFormat'])
+                                                ->format('l, j F Y, h:i a');
+                                                }}
                                             </td>
                                             <td>
-                                                {{ $isi->tanggal_selesai }}
+                                                {{
+                                                Carbon\Carbon::parse($isi->tanggal_selesai)
+                                                ->locale('id')
+                                                ->settings(['formatFunction' => 'translatedFormat'])
+                                                ->format('l, j F Y, h:i a');
+                                                }}
                                             </td>
                                             <td>
                                                 {{

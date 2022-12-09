@@ -63,9 +63,15 @@
                                     <p class="comment">
                                         Kontak UMKM :&nbsp;
                                         <span class="fa fa-phone">
+                                            @if($item->no_wa != null)
+                                            <a href="https://wa.me/{{ $item->no_wa }}" target="_blank">
+                                                {{ $item->no_wa }}
+                                            </a>
+                                            @else
                                             <a href="https://wa.me/{{ $item->phone }}" target="_blank">
                                                 {{ $item->phone }}
                                             </a>
+                                            @endif
                                         </span>
                                     </p>
                                 </div>

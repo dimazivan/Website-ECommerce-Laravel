@@ -252,7 +252,7 @@ Route::group([
 // });
 
 Route::fallback(function () {
-    Alert::info('Proses Gagal', 'Halaman tidak ditemukan');
+    Alert::info('Proses Gagal', 'Loading gagal');
     return redirect('/error');
 });
 

@@ -60,12 +60,12 @@
                     </div>
                     @endif
                     <div class="order_box">
-                        <h2>Rincian Order Penjualan</h2>
+                        <h2>Rincian Order Penjualan&nbsp;({{ $page[0]->nama_umkm }})</h2>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Nama Produk (Nama UMKM)</th>
+                                        <th scope="col">Nama Produk</th>
                                         <th scope="col">Jumlah Beli (Pcs)</th>
                                         <th scope="col">Subtotal</th>
                                     </tr>

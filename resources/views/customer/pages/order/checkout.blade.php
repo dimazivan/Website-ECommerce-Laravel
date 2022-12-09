@@ -236,13 +236,26 @@
                     <form class="row contact_form" action="{{ route('cart.store') }}" method="post" validate
                         enctype="multipart/form-data">
                         @csrf
-                        @if($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                        @if(($errors->any()) != null)
+                        @foreach ($errors->all() as $error)
+                        <div class="col-md-12 form-group p_star">
+                            <div class="alert alert-danger alert-dismissible " role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">x</span>
+                                </button>
+                                {{ $error }}
+                            </div>
+                        </div>
+                        @endforeach
+                        @endif
+                        @if(\Session::has('info'))
+                        <div class="col-md-12 form-group p_star">
+                            <div class="alert alert-info alert-dismissible" role="alert" data-timeout="2000">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">x</span>
+                                </button>
+                                <strong>{{ \Session::get('info') }}</strong>
+                            </div>
                         </div>
                         @endif
                         <input type="text" name="total" value="{{ $total }}" hidden>
@@ -327,7 +340,7 @@
                             </div>
                             <div class="baru">
                                 <div class="form-select" id="default-select">
-                                    <select name="cbshipping" id="cbshipping" required>
+                                    <select name="cbshipping" id="cbshipping">
                                         <option value="" selected disabled>Pilih Jasa Pengiriman</option>
                                         @forelse($shipping as $jasa)
                                         <option value="{{ $jasa->name }}&nbsp;{{ $jasa->type }}">
@@ -353,8 +366,7 @@
                                 <h3>Details Order</h3>
                             </div>
                             <textarea class="form-control" name="detail" id="message" rows="1"
-                                placeholder="Detail order">
-                            </textarea>
+                                placeholder="Detail order"></textarea>
                         </div>
                         <button type="submit" value="submit" class="primary-btn">Submit Order</button>
                     </form>
@@ -552,6 +564,16 @@
     //         }
     //     }
     // }
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        window.setTimeout(function() {
+            $(".alert").fadeTo(1000, 0).slideUp(1000, function() {
+                $(this).remove();
+            });
+        }, 5000);
+
+    });
 </script>
 <!--================End Checkout Area =================-->
 @endsection

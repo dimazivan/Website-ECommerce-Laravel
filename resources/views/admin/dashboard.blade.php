@@ -311,7 +311,7 @@
                                     @endif
                                     @empty
                                     <tr>
-                                        <td colspan="6">Data Transaksi Penjualan Kosong</td>
+                                        <td colspan="5">Data Transaksi Penjualan Kosong</td>
                                     </tr>
                                     @endforelse
                                 </tbody>

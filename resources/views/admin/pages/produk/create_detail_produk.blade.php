@@ -57,8 +57,8 @@
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input type="number" class="form-control has-feedback-left" name="modal"
-                                        placeholder="Modal Produk" min="1"
-                                        oninvalid="this.setCustomValidity('Silahkan masukan modal produk (Rp)')"
+                                        placeholder="Modal Produk" min="1000"
+                                        oninvalid="this.setCustomValidity('Silahkan masukan modal produk (Rp) min Rp. 1000')"
                                         oninput="this.setCustomValidity('')"
                                         onkeydown="return /[0-9,backspace,delete]/i.test(event.key)" required>
                                     <span class="fa fa-tag form-control-feedback left" aria-hidden="true"></span>
@@ -69,8 +69,8 @@
                                         class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input type="number" class="form-control has-feedback-left" name="price"
-                                        placeholder="Harga Produk" min="1"
-                                        oninvalid="this.setCustomValidity('Silahkan masukan harga jual produk (Rp)')"
+                                        placeholder="Harga Produk" min="1000"
+                                        oninvalid="this.setCustomValidity('Silahkan masukan harga jual produk (Rp) min Rp. 1000')"
                                         oninput="this.setCustomValidity('')"
                                         onkeydown="return /[0-9,backspace,delete]/i.test(event.key)" required>
                                     <span class="fa fa-tag form-control-feedback left" aria-hidden="true"></span>

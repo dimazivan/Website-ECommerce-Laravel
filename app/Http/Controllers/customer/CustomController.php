@@ -40,6 +40,7 @@ class CustomController extends Controller
             DB::raw('SUM(estimations.durasi) AS jumlah'),
             'estimations.umkms_id as id_umkm',
             'infos.title as alias',
+            'infos.no_wa as no_wa',
         )
         ->leftjoin('umkms', 'umkms.id', '=', 'estimations.umkms_id')
         ->leftjoin('infos', 'infos.umkms_id', '=', 'estimations.umkms_id')
@@ -171,6 +172,7 @@ class CustomController extends Controller
             DB::raw('SUM(estimations.durasi) AS jumlah'),
             'estimations.umkms_id as id_umkm',
             'infos.title as alias',
+            'infos.no_wa as no_wa',
         )
         ->leftjoin('umkms', 'umkms.id', '=', 'estimations.umkms_id')
         ->leftjoin('infos', 'infos.umkms_id', '=', 'estimations.umkms_id')
@@ -217,6 +219,17 @@ class CustomController extends Controller
         $shipping = Expeditions::distinct()
         ->get();
 
+        $idumkm = Umkms::where('umkm_name', '=', $newname)
+        ->get();
+
+        // dd(
+        //     $idumkm,
+        //     $idumkm[0]->id,
+        // );
+
+        // $shipping = Expeditions::where('umkms_id', '=', $idumkm[0]->id)
+        // ->get();
+
         $listumkm = Estimations::select('umkms.*', 'estimations.*', DB::raw('SUM(estimations.durasi) AS jumlah'), 'estimations.umkms_id as id_umkm')
         ->leftjoin('umkms', 'umkms.id', '=', 'estimations.umkms_id')
         ->groupBy('estimations.umkms_id')
@@ -250,16 +263,16 @@ class CustomController extends Controller
             $pageactive = 'customs';
 
             return view('customer.pages.custom.order_custom', [
-            'user' => $user,
-            'couriers' => $couriers,
-            'provinces' => $provinces,
-            'list_umkm' => $list_umkm,
-            'umkm_name' => $nama_umkm,
-            'umkm' => $listumkm,
-            'shipping' => $shipping,
-            'title' => $title,
-            'info' => $info,
-            'pageactive' => $pageactive,
+                'user' => $user,
+                'couriers' => $couriers,
+                'provinces' => $provinces,
+                'list_umkm' => $list_umkm,
+                'umkm_name' => $nama_umkm,
+                'umkm' => $listumkm,
+                'shipping' => $shipping,
+                'title' => $title,
+                'info' => $info,
+                'pageactive' => $pageactive,
             ]);
         }
     }
@@ -281,10 +294,15 @@ class CustomController extends Controller
 
         $newid = Crypt::decrypt($id_transaksi);
 
-        $page = Customs::where('id', '=', $newid)
-        ->where('users_id', '=', auth()->user()->id)
-        ->where('status', '=', 'Menunggu Pembayaran')
-        ->orWhere('status_payment', '=', 'Ditangguhkan')
+        $page = Customs::select(
+            'customs.*',
+            'umkms.umkm_name as nama_umkm',
+        )
+        ->join('umkms', 'umkms.id', '=', 'customs.umkms_id')
+        ->where('customs.id', '=', $newid)
+        ->where('customs.users_id', '=', auth()->user()->id)
+        ->where('customs.status', '=', 'Menunggu Pembayaran')
+        ->orWhere('customs.status_payment', '=', 'Ditangguhkan')
         ->get();
 
         $user = Customs::where("users_id", auth()->user()->id)

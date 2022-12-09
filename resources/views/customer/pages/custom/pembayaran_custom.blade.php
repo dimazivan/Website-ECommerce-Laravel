@@ -60,7 +60,7 @@
                     </div>
                     @endif
                     <div class="order_box">
-                        <h2>Rincian Order Custom</h2>
+                        <h2>Rincian Order Custom&nbsp;({{ $page[0]->nama_umkm }})</h2>
                         <!-- <ul class="list"> -->
                         <ul class="list">
                             <li><a href="{{asset('/data_file/custom/'.$page[0]->pict_desain_depan)}}"

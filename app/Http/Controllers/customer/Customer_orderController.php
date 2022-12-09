@@ -58,10 +58,12 @@ class Customer_orderController extends Controller
             'Detail_orders.qty as products_qty',
             'Detail_orders.price as products_price',
             'Detail_orders.subtotal as products_subtotal',
+            'umkms.umkm_name as nama_umkm',
         )
         ->join('products', 'products.id', '=', 'detail_orders.products_id')
         ->join('detail_products', 'detail_products.id', '=', 'detail_orders.detail_products_id')
         ->join('orders', 'orders.id', '=', 'detail_orders.orders_id')
+        ->join('umkms', 'umkms.id', '=', 'detail_orders.umkms_id')
         ->where('detail_orders.orders_id', '=', $newid)
         ->where('orders.status', '=', 'Menunggu Pembayaran')
         ->orWhere('orders.status_payment', '=', 'Ditangguhkan')
