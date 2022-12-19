@@ -121,6 +121,7 @@
                                                                 <br>{{ $isi->warna_produk ? $isi->warna_produk : "" }}
                                                             </small>
                                                         </td>
+                                                        @if($isi->tanggal_mulai != null || $isi->tanggal_mulai != 0)
                                                         <td>
                                                             {{
                                                             Carbon\Carbon::parse($isi->tanggal_mulai)
@@ -137,6 +138,14 @@
                                                             ->format('l, j F Y, h:i a');
                                                             }}
                                                         </td>
+                                                        @else
+                                                        <td>
+                                                            {{ $isi->tanggal_mulai }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $isi->selesai }}
+                                                        </td>
+                                                        @endif
                                                         <td>
                                                             {{
                                                             number_format(($isi->estimasi/$datatotal_estimasi)*100,
@@ -216,6 +225,7 @@
                                                     <br>{{ $isi->warna_produk ? $isi->warna_produk : "" }}
                                                 </small>
                                             </td>
+                                            @if($isi->tanggal_mulai != null || $isi->tanggal_mulai != 0)
                                             <td>
                                                 {{
                                                 Carbon\Carbon::parse($isi->tanggal_mulai)
@@ -232,6 +242,14 @@
                                                 ->format('l, j F Y, h:i a');
                                                 }}
                                             </td>
+                                            @else
+                                            <td>
+                                                {{ $isi->tanggal_mulai }}
+                                            </td>
+                                            <td>
+                                                {{ $isi->selesai }}
+                                            </td>
+                                            @endif
                                             <td>
                                                 {{
                                                 number_format(($isi->estimasi/$datatotal_estimasi)*100,

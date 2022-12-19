@@ -110,11 +110,11 @@
                                     <b>
                                         Kode Promo : "{{ $promo[0]->kode_promo }}" ({{ $promo[0]->nama_promo }})<br>
                                         <span style="color:green;">
-                                            @if($item->jumlah <= 100) Potongan : {{ $promo[0]->jumlah_promo }}%
+                                            @if($promo[0]->jumlah_promo <= 100) Potongan : {{ $promo[0]->jumlah_promo
+                                                }}%
                                                 @else
                                                 Potongan : Rp. {{number_format($promo[0]->jumlah_promo,2,',','.')}}
                                                 @endif
-
                                         </span>
                                     </b>
                                     @endif
