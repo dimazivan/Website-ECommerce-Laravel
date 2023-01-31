@@ -78,7 +78,7 @@ Data User, Number ID : {{ $user[0]->id }}
                                     </a>
                                 </li>
                             </ul>
-                            <a href="{{route('user.edit', [$user[0]->id])}}" class="btn btn-success"
+                            <a href="{{route('user.edit', [Crypt::encrypt($user[0]->id)])}}" class="btn btn-success"
                                 style="color:white;"><i class="fa fa-edit m-right-xs"></i>&nbsp;Edit
                                 Profile</a>
                             <br><br>

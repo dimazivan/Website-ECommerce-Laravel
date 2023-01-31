@@ -82,7 +82,7 @@
                                     </strong>
                                 </a>
                             </li>
-                            <li>Deskripsi Order&nbsp;:<br><span>"{{ $page[0]->desc }}"</span></li>
+                            <!-- <li>Deskripsi Order&nbsp;:<br><span>"{{ $page[0]->desc }}"</span></li> -->
                             <li><a>Status Pesanan&nbsp;:<span>{{ $page[0]->status }}</span></a></li>
                             <li><a>Status Pembayaran&nbsp;:<span>{{ $page[0]->status_payment }}</span></a></li>
                         </ul>

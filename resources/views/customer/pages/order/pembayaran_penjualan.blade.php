@@ -100,7 +100,7 @@
                         </div>
                         <!-- <ul class="list"> -->
                         <ul class="list">
-                            <li>Deskripsi Order&nbsp;:<br><span>"{{ $page[0]->detail }}"</span></li>
+                            <!-- <li>Deskripsi Order&nbsp;:<br><span>"{{ $page[0]->detail }}"</span></li> -->
                             @if(!empty($promos[0]))
                             <li><a>Promo "{{ $promos[0]->name }}"&nbsp;:<span>
                                         Rp. {{number_format(($page[0]->potongan),2,',','.')}}
