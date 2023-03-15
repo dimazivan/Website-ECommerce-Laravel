@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon-->
     <link rel="shortcut icon" href="{{asset('toko/production/images/favicon.ico')}}">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <!-- Author Meta -->
     <meta name="dimaz" content="CodePixar">
     <!-- Meta Description -->
