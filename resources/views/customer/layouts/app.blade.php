@@ -8,7 +8,7 @@
 	<link rel="shortcut icon" href="{{asset('toko/production/images/favicon.ico')}}">
 	<!-- Author Meta -->
 	<meta name="dimaz" content="CodePixar">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 	<!-- Meta Description -->
 	<meta name="description" content="">
 	<!-- Meta Keyword -->
@@ -20,7 +20,7 @@
 	<!-- preloader -->
 	<style>
 		#preloader {
-			background: white url('toko/production/images/loading.gif') no-repeat center center;
+			background: white url("<?php echo asset('toko/production/images/loading.gif') ?>") no-repeat center center;
 			height: 100vh;
 			width: 100%;
 			position: fixed;

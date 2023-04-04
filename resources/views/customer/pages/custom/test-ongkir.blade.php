@@ -23,7 +23,7 @@
     <!-- preloader -->
     <style>
         #preloader {
-            background: white url('toko/production/images/loading.gif') no-repeat center center;
+            background: white url("<?php echo asset('toko/production/images/loading.gif') ?>") no-repeat center center;
             height: 100vh;
             width: 100%;
             position: fixed;
