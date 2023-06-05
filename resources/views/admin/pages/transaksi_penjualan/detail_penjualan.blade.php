@@ -259,11 +259,17 @@
                                                 <tr>
                                                     <th>Bukti Pembayaran:</th>
                                                     <td>
-                                                        <a href="{{asset('/data_file/pembayaran/'.$page[0]->pict_payment)}}"
-                                                            target="_blank">
-                                                            {{$page[0]->pict_payment =
-                                                            Str::limit($page[0]->pict_payment, 15)}}
-                                                        </a>
+                                                        <div class="" style="border-style:dotted;">
+                                                            <button type="button" data-toggle="modal"
+                                                                data-target=".modaladduser">
+                                                                <img src="{{asset('/data_file/pembayaran/'.$page[0]->pict_payment)}}"
+                                                                    style="width:300px;height:300px;object-fit:cover;object-position:center;pointer:cursor;">
+                                                            </button>
+                                                            <!-- <a href="{{asset('/data_file/pembayaran/'.$page[0]->pict_payment)}}"
+                                                                target="_blank"> -->
+
+                                                            <!-- </a> -->
+                                                        </div>
                                                     </td>
                                                 </tr>
                                                 @endif
@@ -344,6 +350,15 @@
                         </section>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade modaladduser" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="" style="border-style:dotted;">
+                <img src="{{asset('/data_file/pembayaran/'.$page[0]->pict_payment)}}">
             </div>
         </div>
     </div>
